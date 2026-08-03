@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wabi POS Automator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="app-container">
+        <!-- Notification Toast -->
+        <div id="toast" class="toast hidden">
+            <i class="fa-solid fa-circle-info"></i>
+            <span id="toast-message">Mensaje</span>
+        </div>
+
+        <!-- Login View -->
+        <div id="login-view" class="view active">
+            <div class="glass-panel">
+                <div class="header">
+                    <div class="logo">
+                        <i class="fa-solid fa-bolt text-gradient"></i>
+                    </div>
+                    <h2>Bienvenido a <span class="text-gradient">Wabi POS</span></h2>
+                    <p>Inicia sesión para automatizar tus soportes</p>
+                </div>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label>Correo Electrónico</label>
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Ingresa tu correo" required value="saleth.mamani@wabi.com.bo">
+                    </div>
+                    <div class="input-group">
+                        <label>Access Key</label>
+                        <i class="fa-solid fa-key"></i>
+                        <input type="password" id="access_key" placeholder="Contraseña de acceso" required>
+                    </div>
+                    <button type="submit" class="btn-primary mt-4" id="btn-login">
+                        <span>Ingresar</span>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Form View (Support POS) -->
+        <div id="pos-view" class="view hidden">
+            <div class="glass-panel main-panel">
+                <div class="header-small">
+                    <div class="title-group">
+                        <i class="fa-solid fa-bolt text-gradient"></i>
+                        <h3>Soporte POS</h3>
+                    </div>
+                    <button type="button" id="btn-logout" class="btn-icon" title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                </div>
+
+                <div class="ocr-section">
+                    <input type="file" id="receipt-image" accept="image/*" class="hidden">
+                    <label for="receipt-image" class="btn-secondary" id="btn-scan">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>Escanear Recibo</span>
+                        <div class="spinner hidden"></div>
+                    </label>
+                    <div id="scan-progress" class="progress-bar hidden">
+                        <div class="progress-fill"></div>
+                        <span class="progress-text">Leyendo recibo... 0%</span>
+                    </div>
+                    
+                    <!-- Contenedor para previsualizar la foto -->
+                    <div id="receipt-preview-container" class="hidden">
+                        <img id="receipt-preview" src="" alt="Vista previa del recibo">
+                    </div>
+                </div>
+
+                <form id="pos-form">
+                    <div class="input-group">
+                        <label>Order ID</label>
+                        <i class="fa-solid fa-hashtag"></i>
+                        <input type="number" id="order_id" placeholder="Ej: 260803..." required>
+                    </div>
+                    <div class="row">
+                        <div class="input-group half">
+                            <label>AP</label>
+                            <i class="fa-solid fa-hashtag"></i>
+                            <input type="text" id="ap" placeholder="Ej: 720218" required>
+                        </div>
+                        <div class="input-group half">
+                            <label>REF</label>
+                            <i class="fa-solid fa-hashtag"></i>
+                            <input type="text" id="ref" placeholder="Ej: 022722" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group half">
+                            <label>Terminal</label>
+                            <i class="fa-solid fa-server"></i>
+                            <input type="text" id="terminal" placeholder="Ej: 04" required>
+                        </div>
+                        <div class="input-group half">
+                            <label>Monto (Bs.)</label>
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            <input type="number" step="0.01" id="amount" placeholder="Ej: 654.60" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-group half">
+                            <label>Inicio Tarjeta</label>
+                            <i class="fa-regular fa-credit-card"></i>
+                            <input type="text" id="first_number_card" placeholder="Ej: 557528" required>
+                        </div>
+                        <div class="input-group half">
+                            <label>Fin Tarjeta</label>
+                            <i class="fa-solid fa-credit-card"></i>
+                            <input type="text" id="last_number_card" placeholder="Ej: 8256" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary mt-4" id="btn-submit-pos">
+                        <span>Enviar Soporte</span>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
